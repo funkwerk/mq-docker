@@ -20,7 +20,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   # The URL to download the MQ installer from in tar.gz format
   && MQ_URL=http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqadv/mqadv_dev80_linux_x86-64.tar.gz \
   # The MQ packages to install
-  && MQ_PACKAGES="MQSeriesRuntime-*.rpm MQSeriesServer-*.rpm MQSeriesMsg*.rpm MQSeriesJava*.rpm MQSeriesJRE*.rpm MQSeriesGSKit*.rpm" \
+  && MQ_PACKAGES="MQSeriesRuntime-*.rpm MQSeriesServer-*.rpm MQSeriesMsg*.rpm MQSeriesJava*.rpm MQSeriesJRE*.rpm MQSeriesGSKit*.rpm MQSeriesClient*.rpm MQSeriesSamples*.rpm" \
   # Optional: Update the command prompt
   && echo "mq:8.0" > /etc/debian_chroot \
   # Install additional packages required by this install process and the runtime scripts
