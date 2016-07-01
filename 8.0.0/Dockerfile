@@ -20,7 +20,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   # The URL to download the MQ installer from in tar.gz format
   && MQ_URL=http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqadv/mqadv_dev80_linux_x86-64.tar.gz \
   # The MQ packages to install
-  && MQ_PACKAGES="MQSeriesRuntime-*.rpm MQSeriesServer-*.rpm MQSeriesMsg*.rpm MQSeriesJava*.rpm MQSeriesJRE*.rpm MQSeriesGSKit*.rpm MQSeriesClient*.rpm MQSeriesSamples*.rpm" \
+  && MQ_PACKAGES="MQSeries*.rpm" \
   # Optional: Update the command prompt
   && echo "mq:8.0" > /etc/debian_chroot \
   # Install additional packages required by this install process and the runtime scripts
@@ -31,6 +31,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     curl \
     rpm \
     tar \
+    python \
+    python-dev \
+    python-pip \
   # Download and extract the MQ installation files
   && mkdir -p /tmp/mq \
   && cd /tmp/mq \
@@ -49,6 +52,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && /opt/mqm/bin/setmqinst -p /opt/mqm -i \
   # Clean up all the downloaded files
   && rm -rf /tmp/mq
+
+RUN pip install pymqi
+RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/mqm/lib64/
 
 COPY *.sh /usr/local/bin/
 COPY *.mqsc /etc/mqm/
